@@ -13,6 +13,12 @@ function convertPokeApiDetailPokemon(pokeDetail) {
 
     pokemon.photo = pokeDetail.sprites.other.dream_world.front_default;
 
+    pokemon.height = pokeDetail.height;
+
+    pokemon.weight = pokeDetail.weight;
+
+    pokemon.ability = pokeDetail.abilities[0];
+
     return pokemon;
 }
 
@@ -33,13 +39,10 @@ pokeApi.getPokemons = (offset = 0, limit = 5) => {
         .then((pokemonsDetails) => pokemonsDetails);
 };
 
-pokeApi.getPokemon = (id) => {
-    const url = `https://pokeapi.co/api/v2/pokemon?${id}`;
+pokeApi.getPokemon = async (pokeId) => {
+    const url = `https://pokeapi.co/api/v2/pokemon/${pokeId}`;
 
-    return fetch(url)
-        .then((response) => response.json())
-        .then((jsonBody) => jsonBody.results)
-        .then((pokemon) => pokeApi.getPokemonDetail(pokemon))
-        .then((detailRequests) => Promise(detailRequests))
-        .then((pokemonDetails) => pokemonDetails);
+    return fetch(url).then((response) =>
+        console.log(response.json().pokeApi.getPokemonDetail)
+    );
 };
